@@ -1,0 +1,19 @@
+# Circle CI configuration file
+# https://circleci.com/docs/
+
+machine:
+  python:
+    version: 2.7.11
+
+test:
+  override:
+    - pip install pyinstaller
+    - pyinstaller hmac_test.py
+    - ./dist/hmac_test/hmac_test
+    - pyinstaller -F --distpath dist_onefile hmac_test.py
+    - ./dist_onefile/hmac_test
+
+general:
+  artifacts:
+    - "dist"
+    - "dist_onefile"
